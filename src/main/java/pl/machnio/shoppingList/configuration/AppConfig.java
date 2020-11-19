@@ -1,8 +1,10 @@
 package pl.machnio.shoppingList.configuration;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
@@ -76,6 +78,13 @@ public class AppConfig implements WebMvcConfigurer {
 //    @Override
 //    public void configurePathMatch(PathMatchConfigurer matcher) {
 //        matcher.setUseRegisteredSuffixPatternMatch(true);
+//    }
+
+//    @Bean
+//    public MessageSource messageSource() {
+//        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//        messageSource.setBasename("messages");
+//        return messageSource;
 //    }
 
 }

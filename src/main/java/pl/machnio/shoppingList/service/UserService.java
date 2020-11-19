@@ -18,5 +18,4 @@ public interface UserService {
 
     List<User> findAllUsers();
 
-    boolean isUserInDatabase(Integer id, String email);
 }

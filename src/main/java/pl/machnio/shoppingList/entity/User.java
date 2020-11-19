@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,12 +19,16 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "name")
+    @NotBlank
     private String username;
 
+    @NotBlank
     private String surname;
 
+    @NotBlank
     private String email;
 
+    @NotBlank
     private String password;
 
     private String role;
@@ -41,6 +46,7 @@ public class User implements UserDetails {
     @PrePersist
     public void setCreated() {
         this.created = LocalDateTime.now();
+        this.role = "USER";
     }
 
     public LocalDateTime getUpdated() {
@@ -123,7 +129,4 @@ public class User implements UserDetails {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

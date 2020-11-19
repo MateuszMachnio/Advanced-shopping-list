@@ -1,18 +1,22 @@
 package pl.machnio.shoppingList.entity;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+//public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +29,10 @@ public class User implements UserDetails {
     @NotBlank
     private String lastName;
 
+    //todo my own validator!!
     @NotBlank
+    @Email
+    @Column(unique = true, nullable = false)
     private String email;
 
     @NotBlank
@@ -58,37 +65,37 @@ public class User implements UserDetails {
         this.updated = LocalDateTime.now();
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(role));
-    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return Collections.singleton(new SimpleGrantedAuthority(role));
+//    }
 
-    @Override
+//    @Override
     public String getPassword() {
         return password;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
+//    @Override
+    public String getFirstName() {
+        return firstName;
     }
 
-    @Override
+//    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @Override
+//    @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @Override
+//    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    @Override
+//    @Override
     public boolean isEnabled() {
         return true;
     }
@@ -101,16 +108,16 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -129,4 +136,39 @@ public class User implements UserDetails {
         return role;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id) &&
+                email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }

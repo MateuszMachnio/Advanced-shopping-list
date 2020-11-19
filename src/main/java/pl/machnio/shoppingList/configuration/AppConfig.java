@@ -12,10 +12,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.LocaleContextResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import javax.persistence.EntityManagerFactory;
@@ -70,5 +67,15 @@ public class AppConfig implements WebMvcConfigurer {
         localeResolver.setDefaultLocale(new Locale("pl","PL"));
         return localeResolver;
     }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+
+//    @Override
+//    public void configurePathMatch(PathMatchConfigurer matcher) {
+//        matcher.setUseRegisteredSuffixPatternMatch(true);
+//    }
 
 }

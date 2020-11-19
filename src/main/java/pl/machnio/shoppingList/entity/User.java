@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -26,6 +27,30 @@ public class User implements UserDetails {
     private String password;
 
     private String role;
+
+    @Column(name = "created_on")
+    private LocalDateTime created;
+
+    @Column(name = "updated_on")
+    private LocalDateTime updated;
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    @PrePersist
+    public void setCreated() {
+        this.created = LocalDateTime.now();
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    @PreUpdate
+    public void setUpdated() {
+        this.updated = LocalDateTime.now();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

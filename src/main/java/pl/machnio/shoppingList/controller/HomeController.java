@@ -1,4 +1,4 @@
-package pl.machnio.shoppingList.web;
+package pl.machnio.shoppingList.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

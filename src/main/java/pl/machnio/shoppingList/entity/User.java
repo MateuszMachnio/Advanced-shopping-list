@@ -20,10 +20,10 @@ public class User implements UserDetails {
 
     @Column(name = "name")
     @NotBlank
-    private String username;
+    private String firstName;
 
     @NotBlank
-    private String surname;
+    private String lastName;
 
     @NotBlank
     private String email;

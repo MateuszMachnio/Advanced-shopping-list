@@ -1,4 +1,4 @@
-package pl.machnio.shoppingList.app;
+package pl.machnio.shoppingList.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

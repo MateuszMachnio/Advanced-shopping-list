@@ -27,6 +27,10 @@ public class UserController {
         this.messageSource = messageSource;
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "user/login";
+    }
 
     @GetMapping("/registration")
     public String newUser(ModelMap model) {

@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -36,18 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/", "/user/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .loginPage("/user/login")
                 .and()
                 .logout()
                 .permitAll();
-//                .antMatchers("/some").hasRole("ADMIN")
-//                .and()
-//                .formLogin().defaultSuccessUrl("/");
 
 //        http.authorizeRequests().antMatchers("/", "/list")
 //                .access("hasRole('USER') or hasRole('ADMIN') or hasRole('DBA')")
@@ -71,10 +67,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationProvider;
     }
 
-    @Bean
-    public AuthenticationTrustResolver getAuthenticationTrustResolver() {
-        return new AuthenticationTrustResolverImpl();
-    }
+//    @Bean
+//    public AuthenticationTrustResolver getAuthenticationTrustResolver() {
+//        return new AuthenticationTrustResolverImpl();
+//    }
 
 
 

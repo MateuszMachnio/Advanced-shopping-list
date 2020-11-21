@@ -1,15 +1,15 @@
-<%@ page isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false" %>
+
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Login page</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+    <%@include file="../../constantParts/head.jspf"%>
+<%--    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />--%>
 </head>
 <body>
+<%@include file="../../constantParts/header.jspf" %>
 <div id="mainWrapper">
     <div class="login-container">
         <div class="login-card">
@@ -50,5 +50,6 @@
         </div>
     </div>
 </div>
+<%@include file="../../constantParts/footer.jspf" %>
 </body>
 </html>

@@ -56,8 +56,6 @@ public class User {
     private Set<Plan> plans = new HashSet<>();
 
 
-
-
     public LocalDateTime getCreated() {
         return created;
     }

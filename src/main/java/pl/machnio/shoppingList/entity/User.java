@@ -9,9 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -22,11 +20,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
     @NotBlank
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
     @NotBlank
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     //todo my own validator!!
@@ -36,6 +35,7 @@ public class User {
     private String email;
 
     @NotBlank
+    @Column(nullable = false)
     private String password;
 
     private String role;
@@ -45,6 +45,18 @@ public class User {
 
     @Column(name = "updated_on")
     private LocalDateTime updated;
+
+
+    @ManyToMany
+    @JoinTable(name = "user_recipes", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+    private Set<Recipe> recipes = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "user_plans", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "plan_id"))
+    private Set<Plan> plans = new HashSet<>();
+
+
+
 
     public LocalDateTime getCreated() {
         return created;

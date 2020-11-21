@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -34,6 +35,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
+    //todo my own validator!!
     @NotBlank
     @Column(nullable = false)
     private String password;
@@ -46,11 +48,12 @@ public class User {
     @Column(name = "updated_on")
     private LocalDateTime updated;
 
-
+    @NotEmpty
     @ManyToMany
     @JoinTable(name = "user_recipes", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     private Set<Recipe> recipes = new HashSet<>();
 
+    @NotEmpty
     @ManyToMany
     @JoinTable(name = "user_plans", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "plan_id"))
     private Set<Plan> plans = new HashSet<>();

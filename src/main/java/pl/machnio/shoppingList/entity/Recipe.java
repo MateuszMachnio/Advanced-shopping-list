@@ -1,7 +1,15 @@
 package pl.machnio.shoppingList.entity;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -12,8 +20,132 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Size(max = 50)
+    @Column(nullable = false, length = 50)
+    private String name;
+
+    @NotBlank
+    @Column(nullable = false, unique = true)
+    private String description;
+
+    @Range(min = 1, max = 150)
+    @Column(name = "number_of_servings", nullable = false)
+    private int numberOfServings;
+
+    @Range(min = 1, max = 300)
+    @Column(name = "preparation_time", nullable = false)
+    private int preparationTime;
+
+    @Column(name = "created_on")
+    private LocalDateTime created;
+
+    @Column(name = "updated_on")
+    private LocalDateTime updated;
+
+    @NotEmpty
     @ManyToMany
     @JoinTable(name = "recipe_ingredients", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private Set<Ingredient> ingredients = new HashSet<>();
 
+    @PrePersist
+    public void setCreated() {
+        this.created = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void setUpdated() {
+        this.updated = LocalDateTime.now();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getNumberOfServings() {
+        return numberOfServings;
+    }
+
+    public void setNumberOfServings(int numberOfServings) {
+        this.numberOfServings = numberOfServings;
+    }
+
+    public int getPreparationTime() {
+        return preparationTime;
+    }
+
+    public void setPreparationTime(int preparationTime) {
+        this.preparationTime = preparationTime;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return id.equals(recipe.id) &&
+                description.equals(recipe.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description);
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", numberOfServings=" + numberOfServings +
+                ", preparationTime=" + preparationTime +
+                ", created=" + created +
+                ", updated=" + updated +
+                '}';
+    }
 }

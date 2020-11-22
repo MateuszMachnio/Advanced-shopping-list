@@ -72,13 +72,13 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 
-//    @Override
-//    public void configurePathMatch(PathMatchConfigurer matcher) {
-//        matcher.setUseRegisteredSuffixPatternMatch(true);
-//    }
+    @Override
+    public void configurePathMatch(PathMatchConfigurer matcher) {
+        matcher.setUseRegisteredSuffixPatternMatch(true);
+    }
 
     @Bean
     public MessageSource messageSource() {

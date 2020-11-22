@@ -41,9 +41,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/user/login")
+                .loginProcessingUrl("/user/login")
+                .defaultSuccessUrl("/list", true)
+                .usernameParameter("email")
+                .passwordParameter("password")
                 .and()
-                .logout()
-                .permitAll();
+                .exceptionHandling()
+                .accessDeniedPage("/user/access-denied");
 
 //        http.authorizeRequests().antMatchers("/", "/list")
 //                .access("hasRole('USER') or hasRole('ADMIN') or hasRole('DBA')")
@@ -67,10 +71,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationProvider;
     }
 
-//    @Bean
-//    public AuthenticationTrustResolver getAuthenticationTrustResolver() {
-//        return new AuthenticationTrustResolverImpl();
-//    }
+    @Bean
+    public AuthenticationTrustResolver getAuthenticationTrustResolver() {
+        return new AuthenticationTrustResolverImpl();
+    }
 
 
 

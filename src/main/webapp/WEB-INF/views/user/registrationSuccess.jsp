@@ -1,27 +1,40 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Registration Confirmation Page</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+    <title>Potwierdzenie rejestracji</title>
+    <%@include file="../../constantParts/head.jspf"%>
 </head>
 <body>
-<div class="generic-container">
-    <%@include file="authheader.jsp" %>
+<div class="container">
+    <%@include file="../../constantParts/header.jspf" %>
 
-    <div class="alert alert-success lead">
-        ${success}
+    <div id="content">
+        <div id="topOfContent">
+
+        </div>
+        <div id="middleOfContent">
+
+            <div id="text">
+                <h1>Pomyślnie zarejestrowano</h1>
+
+                    <div style="text-align: center">
+                        <%@include file="authHeader.jspf" %>
+                        <br />
+                        Jeśli już teraz chcesz korzystać z aplikacji, proszę się <a href="<c:url value='/list' />">zalogować</a>.
+                    </div>
+
+            </div>
+        </div>
+        <!-- koniec środka zawartości -->
+        <div id="bottomOfContent">
+
+        </div>
     </div>
+    <!--  koniec divContent  -->
 
-    <span class="well floatRight">
-            Go to <a href="<c:url value='/list' />">Users List</a>
-        </span>
+    <%@include file="../../constantParts/footer.jspf" %>
 </div>
 </body>
-
 </html>

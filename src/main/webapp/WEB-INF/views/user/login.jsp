@@ -20,7 +20,7 @@
                 <h1>Logowanie</h1>
 
                 <div id="form">
-                    <c:url var="loginUrl" value="/login" />
+                    <c:url var="loginUrl" value="/user/login" />
                     <form action="${loginUrl}" method="post">
                         <c:if test="${param.error != null}">
                             <div class="alert alert-danger">
@@ -34,7 +34,7 @@
                         </c:if>
                         <div>
                             <label for="username"><i></i></label>
-                            <input type="text" id="username" name="ssoId" placeholder="Enter Username" required>
+                            <input type="text" id="username" name="email" placeholder="Enter Email" required>
                         </div>
                         <br />
                         <div>
@@ -42,6 +42,9 @@
                             <input type="password" id="password" name="password" placeholder="Enter Password" required>
                         </div>
                         <br />
+                        <div>
+                            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+                        </div>
                         <div>
                             <input type="submit" value="Log in">
                         </div>

@@ -23,8 +23,8 @@
 
                 <div id="form">
 
-                    <form:form method="POST" modelAttribute="user">
-                        <form:input type="hidden" path="id" id="id"/>
+                    <form:form modelAttribute="user">
+<%--                        <form:input type="hidden" path="id" id="id"/>--%>
 
                         <div class="row">
                             <div>

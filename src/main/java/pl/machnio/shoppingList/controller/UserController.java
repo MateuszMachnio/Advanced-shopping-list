@@ -1,17 +1,21 @@
 package pl.machnio.shoppingList.controller;
 
 import org.springframework.context.MessageSource;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.machnio.shoppingList.entity.User;
 import pl.machnio.shoppingList.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Locale;
 
@@ -21,19 +25,16 @@ public class UserController {
 
     private final UserService userService;
     private final MessageSource messageSource;
+    private final AuthenticationTrustResolver authenticationTrustResolver;
 
-    public UserController(UserService userService, MessageSource messageSource) {
+    public UserController(UserService userService, MessageSource messageSource, AuthenticationTrustResolver authenticationTrustResolver) {
         this.userService = userService;
         this.messageSource = messageSource;
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "user/login";
+        this.authenticationTrustResolver = authenticationTrustResolver;
     }
 
     @GetMapping("/registration")
-    public String newUser(ModelMap model) {
+    public String newUser(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("edit", false);
 //        model.addAttribute("loggedinuser", getPrincipal());
@@ -55,9 +56,61 @@ public class UserController {
 
         userService.saveUser(user);
 
-        model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " registered successfully");
-//        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", user.getFirstName());
         return "user/registrationSuccess";
+    }
+
+    @GetMapping("/login")
+    public String loginPage() {
+        if (isCurrentAuthenticationAnonymous()) {
+            return "user/login";
+        } else {
+            return "redirect:/list";
+        }
+    }
+
+    @PostMapping("/login")
+    @ResponseBody
+    public String log() {
+        return "cosik";
+    }
+
+
+    @RequestMapping(value = "/access-denied", method = RequestMethod.GET)
+    public String accessDeniedPage(Model model) {
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "user/accessDenied";
+    }
+
+
+
+
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            //new SecurityContextLogoutHandler().logout(request, response, auth);
+//            persistentTokenBasedRememberMeServices.logout(request, response, auth);
+            SecurityContextHolder.getContext().setAuthentication(null);
+        }
+        return "redirect:/user/login?logout";
+    }
+
+    private boolean isCurrentAuthenticationAnonymous() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authenticationTrustResolver.isAnonymous(authentication);
+    }
+
+    private String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
     }
 
 }

@@ -1,55 +1,63 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-
 <html>
 <head>
-    <title>Login page</title>
+    <title>Strona logowania</title>
     <%@include file="../../constantParts/head.jspf"%>
-<%--    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />--%>
 </head>
 <body>
-<%@include file="../../constantParts/header.jspf" %>
-<div id="mainWrapper">
-    <div class="login-container">
-        <div class="login-card">
-            <div class="login-form">
-                <c:url var="loginUrl" value="/login" />
-                <form action="${loginUrl}" method="post" class="form-horizontal">
-                    <c:if test="${param.error != null}">
-                        <div class="alert alert-danger">
-                            <p>Invalid username and password.</p>
-                        </div>
-                    </c:if>
-                    <c:if test="${param.logout != null}">
-                        <div class="alert alert-success">
-                            <p>You have been logged out successfully.</p>
-                        </div>
-                    </c:if>
-                    <div class="input-group input-sm">
-                        <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
-                        <input type="text" class="form-control" id="username" name="ssoId" placeholder="Enter Username" required>
-                    </div>
-                    <div class="input-group input-sm">
-                        <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-                    </div>
-                    <div class="input-group input-sm">
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="rememberme" name="remember-me"> Remember Me</label>
-                        </div>
-                    </div>
-                    <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+<div class="container">
+    <%@include file="../../constantParts/header.jspf" %>
 
-                    <div class="form-actions">
-                        <input type="submit"
-                               class="btn btn-block btn-primary btn-default" value="Log in">
-                    </div>
-                </form>
+    <div id="content">
+        <div id="topOfContent">
+
+        </div>
+        <div id="middleOfContent">
+
+            <div id="text">
+                <h1>Logowanie</h1>
+
+                <div id="form">
+                    <c:url var="loginUrl" value="/login" />
+                    <form action="${loginUrl}" method="post">
+                        <c:if test="${param.error != null}">
+                            <div class="alert alert-danger">
+                                <p>Invalid username or password.</p>
+                            </div>
+                        </c:if>
+                        <c:if test="${param.logout != null}">
+                            <div class="alert alert-success">
+                                <p>You have been logged out successfully.</p>
+                            </div>
+                        </c:if>
+                        <div>
+                            <label for="username"><i></i></label>
+                            <input type="text" id="username" name="ssoId" placeholder="Enter Username" required>
+                        </div>
+                        <br />
+                        <div>
+                            <label for="password"><i></i></label>
+                            <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                        </div>
+                        <br />
+                        <div>
+                            <input type="submit" value="Log in">
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
+        <!-- koniec środka zawartości -->
+        <div id="bottomOfContent">
+
+        </div>
     </div>
+    <!--  koniec divContent  -->
+
+    <%@include file="../../constantParts/footer.jspf" %>
 </div>
-<%@include file="../../constantParts/footer.jspf" %>
 </body>
 </html>

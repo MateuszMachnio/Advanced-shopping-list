@@ -12,6 +12,13 @@ div.container {
     /*position: relative;*/
     /*border: 3px solid black;*/
 }
+div#form {
+    position: absolute;
+    margin: 0 568px;
+}
+div#insideOfForm {
+
+}
 a {
     color: teal;
     text-decoration: none;
@@ -200,6 +207,8 @@ div#text {
     line-height: 140%;
     font-family: sans-serif;
     font-size: 14px;
+    height: 300px;
+    position: relative;
 }
 h1 {
     text-align: center;

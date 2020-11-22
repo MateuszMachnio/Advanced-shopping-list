@@ -1,119 +1,136 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page isELIgnored="false" %>
 
 <html>
-
 <head>
-    <title>User Registration Form</title>
+    <title>Formularz rejestracji użytkownika</title>
     <%@include file="../../constantParts/head.jspf"%>
 </head>
-
 <body>
-<%@include file="../../constantParts/header.jspf" %>
+<div class="container">
+    <%@include file="../../constantParts/header.jspf" %>
 
-<div class="generic-container">
-    <%@include file="authHeader.jspf" %>
+    <div id="content">
+        <div id="topOfContent">
 
-    <div class="well lead">User Registration Form</div>
-    <form:form method="POST" modelAttribute="user" class="form-horizontal">
-        <form:input type="hidden" path="id" id="id"/>
+        </div>
+        <div id="middleOfContent">
 
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="firstName">First Name</label>
-                <div class="col-md-7">
-                    <form:input type="text" path="firstName" id="firstName" class="form-control input-sm"/>
-                    <div class="has-error">
-                        <form:errors path="firstName" class="help-inline"/>
-                    </div>
+            <div id="text">
+                <h1>Formularz rejestracyjny</h1>
+
+                <div id="form">
+
+                    <form:form method="POST" modelAttribute="user">
+                        <form:input type="hidden" path="id" id="id"/>
+
+                        <div class="row">
+                            <div>
+                                <label for="firstName">First Name</label>
+                                <div>
+                                    <form:input type="text" path="firstName" id="firstName" />
+                                    <div class="has-error">
+                                        <form:errors path="firstName" class="help-inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                <label for="lastName">Last Name</label>
+                                <div>
+                                    <form:input type="text" path="lastName" id="lastName" />
+                                    <div class="has-error">
+                                        <form:errors path="lastName" class="help-inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%--        <div class="row">--%>
+                        <%--            <div class="form-group col-md-12">--%>
+                        <%--                <label class="col-md-3 control-lable" for="ssoId">SSO ID</label>--%>
+                        <%--                <div class="col-md-7">--%>
+                        <%--                    <c:choose>--%>
+                        <%--                        <c:when test="${edit}">--%>
+                        <%--                            <form:input type="text" path="ssoId" id="ssoId" class="form-control input-sm" disabled="true"/>--%>
+                        <%--                        </c:when>--%>
+                        <%--                        <c:otherwise>--%>
+                        <%--                            <form:input type="text" path="ssoId" id="ssoId" class="form-control input-sm" />--%>
+                        <%--                            <div class="has-error">--%>
+                        <%--                                <form:errors path="ssoId" class="help-inline"/>--%>
+                        <%--                            </div>--%>
+                        <%--                        </c:otherwise>--%>
+                        <%--                    </c:choose>--%>
+                        <%--                </div>--%>
+                        <%--            </div>--%>
+                        <%--        </div>--%>
+
+                        <div class="row">
+                            <div>
+                                <label for="password">Password</label>
+                                <div>
+                                    <form:input type="password" path="password" id="password" />
+                                    <div class="has-error">
+                                        <form:errors path="password" class="help-inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                <label for="email">Email</label>
+                                <div>
+                                    <form:input type="text" path="email" id="email" />
+                                    <div class="has-error">
+                                        <form:errors path="email" class="help-inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <%--        <div class="row">--%>
+                        <%--            <div class="form-group col-md-12">--%>
+                        <%--                <label class="col-md-3 control-lable" for="userProfiles">Roles</label>--%>
+                        <%--                <div class="col-md-7">--%>
+                        <%--                    <form:select path="userProfiles" items="${roles}" multiple="true" itemValue="id" itemLabel="type" class="form-control input-sm" />--%>
+                        <%--                    <div class="has-error">--%>
+                        <%--                        <form:errors path="userProfiles" class="help-inline"/>--%>
+                        <%--                    </div>--%>
+                        <%--                </div>--%>
+                        <%--            </div>--%>
+                        <%--        </div>--%>
+
+                        <div class="row">
+                            <div>
+                                <c:choose>
+                                    <c:when test="${edit}">
+                                        <input type="submit" value="Update" /> or <a href="<c:url value='/list' />">Cancel</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="submit" value="Register" /> or <a href="<c:url value='/list' />">Cancel</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+                    </form:form>
                 </div>
+
             </div>
         </div>
+        <!-- koniec środka zawartości -->
+        <div id="bottomOfContent">
 
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="lastName">Last Name</label>
-                <div class="col-md-7">
-                    <form:input type="text" path="lastName" id="lastName" class="form-control input-sm" />
-                    <div class="has-error">
-                        <form:errors path="lastName" class="help-inline"/>
-                    </div>
-                </div>
-            </div>
         </div>
+    </div>
+    <!--  koniec divContent  -->
 
-<%--        <div class="row">--%>
-<%--            <div class="form-group col-md-12">--%>
-<%--                <label class="col-md-3 control-lable" for="ssoId">SSO ID</label>--%>
-<%--                <div class="col-md-7">--%>
-<%--                    <c:choose>--%>
-<%--                        <c:when test="${edit}">--%>
-<%--                            <form:input type="text" path="ssoId" id="ssoId" class="form-control input-sm" disabled="true"/>--%>
-<%--                        </c:when>--%>
-<%--                        <c:otherwise>--%>
-<%--                            <form:input type="text" path="ssoId" id="ssoId" class="form-control input-sm" />--%>
-<%--                            <div class="has-error">--%>
-<%--                                <form:errors path="ssoId" class="help-inline"/>--%>
-<%--                            </div>--%>
-<%--                        </c:otherwise>--%>
-<%--                    </c:choose>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="password">Password</label>
-                <div class="col-md-7">
-                    <form:input type="password" path="password" id="password" class="form-control input-sm" />
-                    <div class="has-error">
-                        <form:errors path="password" class="help-inline"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="email">Email</label>
-                <div class="col-md-7">
-                    <form:input type="text" path="email" id="email" class="form-control input-sm" />
-                    <div class="has-error">
-                        <form:errors path="email" class="help-inline"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-<%--        <div class="row">--%>
-<%--            <div class="form-group col-md-12">--%>
-<%--                <label class="col-md-3 control-lable" for="userProfiles">Roles</label>--%>
-<%--                <div class="col-md-7">--%>
-<%--                    <form:select path="userProfiles" items="${roles}" multiple="true" itemValue="id" itemLabel="type" class="form-control input-sm" />--%>
-<%--                    <div class="has-error">--%>
-<%--                        <form:errors path="userProfiles" class="help-inline"/>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-        <div class="row">
-            <div class="form-actions floatRight">
-                <c:choose>
-                    <c:when test="${edit}">
-                        <input type="submit" value="Update" class="btn btn-primary btn-sm"/> or <a href="<c:url value='/list' />">Cancel</a>
-                    </c:when>
-                    <c:otherwise>
-                        <input type="submit" value="Register" class="btn btn-primary btn-sm"/> or <a href="<c:url value='/list' />">Cancel</a>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-        </div>
-    </form:form>
+    <%@include file="../../constantParts/footer.jspf" %>
 </div>
-<%@include file="../../constantParts/footer.jspf" %>
-
 </body>
 </html>

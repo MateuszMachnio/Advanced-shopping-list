@@ -32,6 +32,23 @@ div#topOfContainer {
     position: relative;
     margin-bottom: 0;
 }
+div#main-logo {
+    position: absolute;
+    left: 100px;
+    top: 10px;
+}
+a#logo {
+    font-family: "Charmonman", cursive;
+    display: inline-block;
+    color: white;
+    margin-top: 10px;
+    font-size: 2.7rem;
+    font-weight: 600;
+    border: none;
+}
+a#logo span {
+    color: #ff6600;
+}
 img.logo {
     position: absolute;
     /*margin: 20px;*/
@@ -41,9 +58,11 @@ img.logo {
 div#contactBox {
     position: absolute;
     right: 10px;
-    color: white;
     height: 131px;
     font-family: "Trebuchet MS", sans-serif;
+}
+div#contactBox tr {
+    color: white;
     font-size: 15px;
     line-height: 115%;
 }
@@ -53,7 +72,7 @@ div#contactBox a {
 /* górne menu */
 div#topMenu {
     position: absolute;
-    bottom: -5px;
+    bottom: -15px;
     left: 50px;
 }
 ul#topMenuList li {
@@ -163,6 +182,7 @@ ul#firstLevel li:hover ul.secondLevel {
 }
 #topOfContent {
     background-image: url("images/gora_strony.jpg");
+    margin-top: 30px;
     height: 31px;
     width: 1400px;
 }

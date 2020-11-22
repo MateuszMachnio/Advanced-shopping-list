@@ -9,13 +9,7 @@ public class HomeController {
 
     @GetMapping("")
     public String homePage() {
-        return "home2";
-    }
-
-    @GetMapping("/some")
-    @ResponseBody
-    public String test() {
-        return "some";
+        return "home";
     }
 
 }

@@ -34,10 +34,6 @@ public class Plan {
     @Column(name = "updated_on")
     private LocalDateTime updated;
 
-    @NotEmpty
-    @ManyToMany
-    @JoinTable(name = "plan_recipes", joinColumns = @JoinColumn(name = "plan_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
-    private Set<Recipe> recipes = new HashSet<>();
 
     @PrePersist
     public void setCreated() {
@@ -79,14 +75,6 @@ public class Plan {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
     }
 
     public String getDescription() {

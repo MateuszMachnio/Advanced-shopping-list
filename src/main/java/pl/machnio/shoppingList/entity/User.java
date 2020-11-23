@@ -159,6 +159,22 @@ public class User {
         this.updated = updated;
     }
 
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public Set<Plan> getPlans() {
+        return plans;
+    }
+
+    public void setPlans(Set<Plan> plans) {
+        this.plans = plans;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

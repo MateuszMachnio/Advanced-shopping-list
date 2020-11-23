@@ -10,19 +10,7 @@ public class HomeController {
 
     @GetMapping("")
     public String homePage() {
-        return "list";
-    }
-
-    @GetMapping("/list")
-    @ResponseBody
-    public String list() {
-        return "list";
-    }
-
-    @PostMapping("/login")
-    @ResponseBody
-    public String test() {
-        return "login";
+        return "home";
     }
 
 }

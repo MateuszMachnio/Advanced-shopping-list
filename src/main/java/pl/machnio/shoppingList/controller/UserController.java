@@ -71,7 +71,7 @@ public class UserController {
 
     @RequestMapping(value = "/access-denied", method = RequestMethod.GET)
     public String accessDeniedPage(Model model) {
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("loggedinuser", userService.getPrincipal());
         return "user/accessDenied";
     }
 
@@ -92,18 +92,6 @@ public class UserController {
     private boolean isCurrentAuthenticationAnonymous() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authenticationTrustResolver.isAnonymous(authentication);
-    }
-
-    private String getPrincipal(){
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails)principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
     }
 
 }

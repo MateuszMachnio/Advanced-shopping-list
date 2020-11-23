@@ -1,8 +1,12 @@
 package pl.machnio.shoppingList.service;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.machnio.shoppingList.entity.User;
 import pl.machnio.shoppingList.repository.UserRepository;
 
@@ -58,6 +62,27 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
+
+    @Override
+    @Transactional
+    public User getCurrentUser() {
+        User user = userRepository.findByEmail(getPrincipal());
+        Hibernate.initialize(user.getPlans());
+        return user;
     }
 
 }

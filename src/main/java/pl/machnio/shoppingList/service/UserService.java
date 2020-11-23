@@ -18,4 +18,8 @@ public interface UserService {
 
     List<User> findAllUsers();
 
+    String getPrincipal();
+
+    User getCurrentUser();
+
 }

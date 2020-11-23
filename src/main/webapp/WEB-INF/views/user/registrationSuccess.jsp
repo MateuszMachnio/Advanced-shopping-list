@@ -22,7 +22,7 @@
                     <div style="text-align: center">
                         <%@include file="authHeader.jspf" %>
                         <br />
-                        Jeśli już teraz chcesz korzystać z aplikacji, proszę się <a href="<c:url value='/list' />">zalogować</a>.
+                        Jeśli już teraz chcesz korzystać z aplikacji, proszę się <a href="<c:url value="/user/login" />">zalogować</a>.
                     </div>
 
             </div>

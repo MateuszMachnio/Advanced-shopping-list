@@ -29,6 +29,10 @@ public class Recipe {
     @Column(nullable = false, unique = true)
     private String description;
 
+    @NotBlank
+    @Column(nullable = false, unique = true)
+    private String preparation;
+
     @Range(min = 1, max = 150)
     @Column(name = "number_of_servings", nullable = false)
     private int numberOfServings;

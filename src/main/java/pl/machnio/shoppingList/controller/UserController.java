@@ -69,10 +69,9 @@ public class UserController {
         }
     }
 
-    @PostMapping("/login")
-    @ResponseBody
-    public String log() {
-        return "cosik";
+    @GetMapping("/list")
+    public String list() {
+        return "list";
     }
 
 

@@ -64,7 +64,7 @@ public class UserController {
         if (isCurrentAuthenticationAnonymous()) {
             return "user/login";
         } else {
-            return "dashboard";
+            return "redirect:/logged_user/dashboard";
         }
     }
 

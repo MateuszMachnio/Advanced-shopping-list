@@ -3,11 +3,11 @@
 <html>
 <head>
     <title>Strona powitalna zalogowanego użytkownika</title>
-    <%@include file="../constantParts/head.jspf" %>
+    <%@include file="../../constantParts/head.jspf" %>
 </head>
 <body>
 <div class="container">
-    <%@include file="../constantParts/loggedHeader.jspf"%>
+    <%@include file="../../constantParts/loggedHeader.jspf"%>
 
     <div id="content">
 
@@ -43,7 +43,7 @@
             </div>
     </div>
     <!--  koniec divContent  -->
-    <%@include file="../constantParts/footer.jspf"%>
+    <%@include file="../../constantParts/footer.jspf"%>
 </div>
 </body>
 </html>

@@ -24,6 +24,10 @@ public class Plan {
     @Column(nullable = false, length = 50)
     private String name;
 
+    @NotBlank
+    @Column(nullable = false, unique = true)
+    private String description;
+
     @Column(name = "created_on")
     private LocalDateTime created;
 
@@ -83,6 +87,14 @@ public class Plan {
 
     public void setRecipes(Set<Recipe> recipes) {
         this.recipes = recipes;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

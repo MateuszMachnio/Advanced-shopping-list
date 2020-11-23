@@ -1,16 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: machn
-  Date: 23.11.2020
-  Time: 19:14
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div id="sidebar">
+    <ul>
+        <li><a href="<c:url value="/user/login"/>"><span class="sidebarSpan">Logowanie</span></a></li>
+        <li><a href="<c:url value="/user/registration"/>"><span class="sidebarSpan">Rejestracja</span></a></li>
+        <li><a href="#"><span class="sidebarSpan">Zakładka</span></a></li>
+        <li><a href="#"><span class="sidebarSpan">Jeszcze</span></a></li>
+        <li><a href="#"><span class="sidebarSpan">nie</span></a></li>
+        <li><a href="#"><span class="sidebarSpan">Internet</span></a></li>
+    </ul>
+</div>

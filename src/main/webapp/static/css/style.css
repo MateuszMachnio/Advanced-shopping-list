@@ -214,8 +214,8 @@ div#sidebar li a:hover {
     border-bottom: 2px solid #ff6600;
     padding-bottom: 3px;
 }
-span.sidebarSpan {
-    /*margin-top: 10px;*/
+.error {
+    color: red;
 }
 #topOfContent {
     background-image: url("images/gora_strony.jpg");

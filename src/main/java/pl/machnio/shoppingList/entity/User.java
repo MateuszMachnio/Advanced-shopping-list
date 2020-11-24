@@ -56,6 +56,13 @@ public class User {
     @JoinTable(name = "user_plans", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "plan_id"))
     private Set<Plan> plans = new HashSet<>();
 
+    public void addPlan(Plan plan) {
+        plans.add(plan);
+    }
+
+    public void addRecipe(Recipe recipe) {
+        recipes.add(recipe);
+    }
 
     public LocalDateTime getCreated() {
         return created;

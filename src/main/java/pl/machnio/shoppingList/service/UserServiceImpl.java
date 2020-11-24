@@ -79,9 +79,17 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public User getCurrentUser() {
+    public User getCurrentUserWithPlans() {
         User user = userRepository.findByEmail(getPrincipal());
         Hibernate.initialize(user.getPlans());
+        return user;
+    }
+
+    @Override
+    @Transactional
+    public User getCurrentUserWithRecipes() {
+        User user = userRepository.findByEmail(getPrincipal());
+        Hibernate.initialize(user.getRecipes());
         return user;
     }
 

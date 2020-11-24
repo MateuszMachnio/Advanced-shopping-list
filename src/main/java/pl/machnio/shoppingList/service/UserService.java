@@ -20,6 +20,8 @@ public interface UserService {
 
     String getPrincipal();
 
-    User getCurrentUser();
+    User getCurrentUserWithPlans();
+
+    User getCurrentUserWithRecipes();
 
 }

@@ -3,10 +3,7 @@ package pl.machnio.shoppingList.entity;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -47,10 +44,10 @@ public class Recipe {
     @Column(name = "updated_on")
     private LocalDateTime updated;
 
-    @NotEmpty
-    @ManyToMany
-    @JoinTable(name = "recipe_ingredients", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private Set<Ingredient> ingredients = new HashSet<>();
+    @NotNull
+    @OneToOne(optional = false)
+    @JoinColumn(name = "set_of_ingr_with_quant_id")
+    private SetOfIngredientsWithQuantities setOfIngredientsWithQuantities;
 
     @PrePersist
     public void setCreated() {
@@ -118,12 +115,20 @@ public class Recipe {
         this.updated = updated;
     }
 
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
+    public String getPreparation() {
+        return preparation;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setPreparation(String preparation) {
+        this.preparation = preparation;
+    }
+
+    public SetOfIngredientsWithQuantities getSetOfIngredientsWithQuantities() {
+        return setOfIngredientsWithQuantities;
+    }
+
+    public void setSetOfIngredientsWithQuantities(SetOfIngredientsWithQuantities setOfIngredientsWithQuantities) {
+        this.setOfIngredientsWithQuantities = setOfIngredientsWithQuantities;
     }
 
     @Override

@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Dodawanie planu</title>
+    <title>Dodawanie przepisu</title>
     <%@include file="../../constantParts/head.jspf" %>
 </head>
 <body>
@@ -18,25 +18,25 @@
             <%@include file="../../constantParts/loggedSidebar.jsp"%>
 
             <div id="text" style="text-align: center">
-                <h1>Dodawanie planu</h1>
+                <h1>Dodawanie przepisu</h1>
 
-                <form:form modelAttribute="plan">
+                <form:form modelAttribute="recipe">
                     <table>
                         <tr>
-                            <td><form:label path="name">Nazwa planu: </form:label></td>
+                            <td><form:label path="name">Nazwa przepisu: </form:label></td>
                             <td><form:input path="name"/></td>
                             <td><form:errors path="name" cssClass="error"/></td>
                         </tr>
 
                         <tr>
-                            <td><form:label path="description">Opis planu: </form:label></td>
+                            <td><form:label path="description">Opis przepisu: </form:label></td>
                             <td><form:textarea cols="20" rows="5" path="description"/></td>
                             <td><form:errors path="description" cssClass="error"/></td>
                         </tr>
                     </table>
                     <br />
 
-                    <input type="submit" value="Dodaj plan">
+                    <input type="submit" value="Dodaj przepis">
                     <form:button><a href="<c:url value="/logged_user/dashboard"/>">Powrót</a></form:button>
 
                 </form:form>

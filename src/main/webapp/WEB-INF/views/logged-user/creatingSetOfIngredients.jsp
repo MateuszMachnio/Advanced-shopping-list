@@ -33,6 +33,10 @@
                             </tr>
                         </c:forEach>
                     </table>
+                    <form action="/logged-user/create-recipe">
+                        <input type="hidden" name="setId" value="${setWithIngredients.id}">
+                        <input type="submit" value="Zatwierdź">
+                    </form>
 
                 </c:if>
 
@@ -61,8 +65,8 @@
 
                     <input type="hidden" name="setId" value="${setWithIngredients.id}">
 
-                    <input type="submit" <c:if test="${setWithIngredients != null}"> formaction="/logged-user/add-next-ingredient-to-set" formmethod="post" </c:if> value="Dodaj składnik">
-                    <form:button><a href="<c:url value="/logged_user/dashboard"/>">Powrót</a></form:button>
+                    <input type="submit" value="Dodaj składnik">
+<%--                    <form:button><a href="<c:url value="/logged_user/dashboard"/>">Gotowe</a></form:button>--%>
 
                 </form:form>
 

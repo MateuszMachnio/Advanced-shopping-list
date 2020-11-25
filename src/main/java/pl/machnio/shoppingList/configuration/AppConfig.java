@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.LocaleContextResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import pl.machnio.shoppingList.converter.IngredientConverter;
 
 import javax.persistence.EntityManagerFactory;
 import java.nio.charset.StandardCharsets;
@@ -49,7 +50,7 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-
+        registry.addConverter(ingredientConverter());
     }
 
     @Bean
@@ -85,6 +86,11 @@ public class AppConfig implements WebMvcConfigurer {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages");
         return messageSource;
+    }
+
+    @Bean
+    public IngredientConverter ingredientConverter() {
+        return new IngredientConverter();
     }
 
 }

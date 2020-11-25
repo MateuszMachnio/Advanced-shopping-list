@@ -1,4 +1,7 @@
 package pl.machnio.shoppingList.repository;
 
-public interface IngredientsWithQuantityRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import pl.machnio.shoppingList.entity.IngredientWithQuantity;
+
+public interface IngredientWithQuantityRepository extends JpaRepository<IngredientWithQuantity, Long> {
 }

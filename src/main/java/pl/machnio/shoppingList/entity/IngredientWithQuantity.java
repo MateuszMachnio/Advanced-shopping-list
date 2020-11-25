@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "ingredients_with_quantities")
-public class IngredientsWithQuantity {
+public class IngredientWithQuantity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,7 +50,7 @@ public class IngredientsWithQuantity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        IngredientsWithQuantity that = (IngredientsWithQuantity) o;
+        IngredientWithQuantity that = (IngredientWithQuantity) o;
         return id.equals(that.id);
     }
 
@@ -61,7 +61,7 @@ public class IngredientsWithQuantity {
 
     @Override
     public String toString() {
-        return "IngredientsWithQuantity{" +
+        return "IngredientWithQuantity{" +
                 "id=" + id +
                 ", ingredient=" + ingredient +
                 ", quantity=" + quantity +

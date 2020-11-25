@@ -18,25 +18,50 @@
             <%@include file="../../constantParts/loggedSidebar.jsp"%>
 
             <div id="text" style="text-align: center">
-                <h1>Dodawanie przepisu</h1>
-
-                <form:form modelAttribute="recipe">
+                <h1>Dodawanie składniku do przepisu</h1>
+                <c:if test="${setWithIngredients != null}">
                     <table>
                         <tr>
-                            <td><form:label path="name">Nazwa przepisu: </form:label></td>
-                            <td><form:input path="name"/></td>
-                            <td><form:errors path="name" cssClass="error"/></td>
+                            <th>składnik</th>
+                            <th>ilość</th>
+                        </tr>
+
+                        <c:forEach items="${setWithIngredients.ingredientsWithQuantities}" var="ingredientWithQuantity">
+                            <tr>
+                                <td>${ingredientWithQuantity.ingredient.name}</td>
+                                <td>${ingredientWithQuantity.quantity}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+
+                </c:if>
+
+
+
+                <form:form modelAttribute="ingredientsWithQuantity">
+                    <table>
+                        <tr>
+                            <td><form:label path="ingredient">Składnik: </form:label></td>
+                            <td>
+                                <form:select path="ingredient">
+                                <form:option value="0" label="--select ingredient--"/>
+                                <form:options items="${ingredients}" itemLabel="name" itemValue="id" />
+                                </form:select>
+                            </td>
+                            <td><form:errors path="ingredient" cssClass="error"/></td>
                         </tr>
 
                         <tr>
-                            <td><form:label path="description">Opis przepisu: </form:label></td>
-                            <td><form:textarea cols="20" rows="5" path="description"/></td>
-                            <td><form:errors path="description" cssClass="error"/></td>
+                            <td><form:label path="quantity">Ilość: </form:label></td>
+                            <td><form:input path="quantity"/>gram</td>
+                            <td><form:errors path="quantity" cssClass="error"/></td>
                         </tr>
                     </table>
                     <br />
 
-                    <input type="submit" value="Dodaj przepis">
+                    <input type="hidden" name="setId" value="${setWithIngredients.id}">
+
+                    <input type="submit" <c:if test="${setWithIngredients != null}"> formaction="/logged-user/add-next-ingredient-to-set" formmethod="post" </c:if> value="Dodaj składnik">
                     <form:button><a href="<c:url value="/logged_user/dashboard"/>">Powrót</a></form:button>
 
                 </form:form>

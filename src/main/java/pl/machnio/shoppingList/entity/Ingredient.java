@@ -19,9 +19,6 @@ public class Ingredient {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Range(min = 1, max = 5000)
-    private int quantity;
-
     public Long getId() {
         return id;
     }
@@ -38,13 +35,6 @@ public class Ingredient {
         this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -65,7 +55,7 @@ public class Ingredient {
         return "Ingredient{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", quantity=" + quantity +
+                ", quantity=" +
                 '}';
     }
 }

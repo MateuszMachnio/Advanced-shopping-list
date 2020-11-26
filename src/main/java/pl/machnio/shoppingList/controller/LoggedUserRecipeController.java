@@ -94,4 +94,18 @@ public class LoggedUserRecipeController {
         return "redirect:list";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editRecipe(@PathVariable long id, Model model) {
+        Recipe recipe = recipeService.findById(id);
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("setOfIngredients", setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(recipe.getSetOfIngredientsWithQuantities().getId()));
+        return "logged-user/recipe/edit";
+    }
+
+    @PostMapping("/delete")
+    public String editingRecipe(Recipe recipe) {
+        recipeService.updateRecipe(recipe);
+        return "redirect:list";
+    }
+
 }

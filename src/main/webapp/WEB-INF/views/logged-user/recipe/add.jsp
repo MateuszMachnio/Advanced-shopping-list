@@ -47,27 +47,32 @@
                             <td><form:input path="preparationTime"/></td>
                             <td><form:errors path="preparationTime" cssClass="error"/></td>
                         </tr>
+                        <tr>
+                            <td><form:label path="setOfIngredientsWithQuantities">Składniki: </form:label></td>
+                            <form:hidden path="setOfIngredientsWithQuantities"/>
+                            <td>
+                                <table>
+                                    <c:forEach items="${setOfIngredients.ingredientsWithQuantities}" var="ingredientWithQuantity">
+                                        <tr>
+                                            <td>${ingredientWithQuantity.ingredient.name}</td>
+                                            <td>${ingredientWithQuantity.quantity} gram</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </td>
+                            <td>
+                                <form:form modelAttribute="setOfIngredients" method="post" action="...">
+                                    <input type="submit" value="Edytuj składniki">
+                                </form:form>
+                            </td>
+                        </tr>
                     </table>
                     <br />
-                    <form:hidden path="setOfIngredientsWithQuantities"/>
 
                     <input type="submit" value="Dodaj przepis">
                     <%--                    <form:button><a href="<c:url value="/logged_user/dashboard"/>">Gotowe</a></form:button>--%>
                 </form:form>
                 <br />
-
-                <table>
-                <c:forEach items="${setOfIngredients.ingredientsWithQuantities}" var="ingredientWithQuantity">
-                    <tr>
-                        <td>${ingredientWithQuantity.ingredient.name}</td>
-                        <td>${ingredientWithQuantity.quantity} gram</td>
-                    </tr>
-                </c:forEach>
-                </table>
-
-                <form:form modelAttribute="setOfIngredients" method="post" action="...">
-                    <input type="submit" value="Edytuj składniki">
-                </form:form>
 
             </div>
         </div>

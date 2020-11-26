@@ -33,7 +33,7 @@
                             </tr>
                         </c:forEach>
                     </table>
-                    <form action="/logged-user/create-recipe">
+                    <form action="/logged-user/recipe/add">
                         <input type="hidden" name="setId" value="${setWithIngredients.id}">
                         <input type="submit" value="Zatwierdź">
                     </form>

@@ -33,13 +33,13 @@ public class LoggedUserRecipeController {
     @GetMapping("/create-set-of-ingredients")
     public String addIngredientsToRecipe(Model model) {
         model.addAttribute("ingredientsWithQuantity", new IngredientWithQuantity());
-        return "logged-user/creatingSetOfIngredients";
+        return "logged-user/recipe/creatingSetOfIngredients";
     }
 
     @PostMapping("/create-set-of-ingredients")
     public String addingIngredientsToRecipe(@Valid @ModelAttribute("ingredientsWithQuantity") IngredientWithQuantity ingredientWithQuantity, BindingResult result, @ModelAttribute("setId") String setId, Model model) {
         if (result.hasErrors()) {
-            return "logged-user/creatingSetOfIngredients";
+            return "logged-user/recipe/creatingSetOfIngredients";
         }
 
         IngredientWithQuantity savedIngredientWithQuantity = ingredientWithQuantityService.saveIngredientWithQuantity(ingredientWithQuantity);
@@ -48,14 +48,14 @@ public class LoggedUserRecipeController {
             set.addIngredientWithQuantity(savedIngredientWithQuantity);
             setOfIngredientsWithQuantitiesService.updateSetOfIngredientsWithQuantities(set);
             model.addAttribute("setWithIngredients", set);
-            return "logged-user/creatingSetOfIngredients";
+            return "logged-user/recipe/creatingSetOfIngredients";
         }
 
         SetOfIngredientsWithQuantities setOfIngredientsWithQuantities = new SetOfIngredientsWithQuantities();
         setOfIngredientsWithQuantities.addIngredientWithQuantity(savedIngredientWithQuantity);
         SetOfIngredientsWithQuantities savedSetOfIngredientsWithQuantities = setOfIngredientsWithQuantitiesService.saveSetOfIngredientsWithQuantities(setOfIngredientsWithQuantities);
         model.addAttribute("setWithIngredients", savedSetOfIngredientsWithQuantities);
-        return "logged-user/creatingSetOfIngredients";
+        return "logged-user/recipe/creatingSetOfIngredients";
     }
 
     @GetMapping("/add")
@@ -65,16 +65,21 @@ public class LoggedUserRecipeController {
         recipe.setSetOfIngredientsWithQuantities(setOfIngredients);
         model.addAttribute("setOfIngredients", setOfIngredients);
         model.addAttribute("recipe", recipe);
-        return "logged-user/addRecipe";
+        return "logged-user/recipe/add";
     }
 
     @PostMapping("/add")
     public String addRecipe(@Valid Recipe recipe, BindingResult result) {
         if (result.hasErrors()) {
-            return "logged-user/addRecipe";
+            return "logged-user/recipe/add";
         }
         recipeService.saveRecipe(recipe);
         return "redirect:list";
     }
 
+    @GetMapping("/list")
+    public String recipeList(Model model) {
+        model.addAttribute("recipeList", recipeService.findAllRecipes());
+        return
+    }
 }

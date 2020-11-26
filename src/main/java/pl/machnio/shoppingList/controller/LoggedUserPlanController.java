@@ -28,13 +28,13 @@ public class LoggedUserPlanController {
     @GetMapping("/add")
     public String addPlan(Model model) {
         model.addAttribute("plan", new Plan());
-        return "logged-user/addPlan";
+        return "/logged-user/plan/add";
     }
 
     @PostMapping("/add")
     public String addingPlan(@Valid Plan plan, BindingResult result) {
         if (result.hasErrors()) {
-            return "logged-user/addPlan";
+            return "/logged-user/plan/add";
         }
         User currentUser = userService.getCurrentUserWithPlans();
         Plan savedPlan = planService.savePlan(plan);

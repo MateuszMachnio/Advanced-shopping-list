@@ -4,18 +4,18 @@
 <html>
 <head>
     <title>Dodawanie przepisu</title>
-    <%@include file="../../constantParts/head.jspf" %>
+    <%@include file="../../../constantParts/head.jspf" %>
 </head>
 <body>
 <div class="container">
-    <%@include file="../../constantParts/loggedHeader.jspf"%>
+    <%@include file="../../../constantParts/loggedHeader.jspf"%>
 
     <div id="content">
         <div id="topOfContent" style="margin-top: 10px">
         </div>
 
         <div id="middleOfContent">
-            <%@include file="../../constantParts/loggedSidebar.jsp"%>
+            <%@include file="../../../constantParts/loggedSidebar.jsp"%>
 
             <div id="text" style="text-align: center">
                 <h1>Dodawanie przepisu</h1>
@@ -76,7 +76,7 @@
         </div>
     </div>
     <!--  koniec divContent  -->
-    <%@include file="../../constantParts/footer.jspf"%>
+    <%@include file="../../../constantParts/footer.jspf"%>
 </div>
 </body>
 </html>

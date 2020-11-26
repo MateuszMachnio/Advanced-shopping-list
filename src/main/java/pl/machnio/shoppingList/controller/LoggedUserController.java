@@ -18,13 +18,9 @@ import java.util.Set;
 @RequestMapping("/logged-user")
 public class LoggedUserController {
 
-    private final PlanService planService;
-    private final UserService userService;
     private final IngredientService ingredientService;
 
-    public LoggedUserController(PlanService planService, UserService userService, RecipeService recipeService, IngredientWithQuantityService ingredientWithQuantityService, SetOfIngredientsWithQuantitiesService setOfIngredientsWithQuantitiesService, IngredientService ingredientService) {
-        this.planService = planService;
-        this.userService = userService;
+    public LoggedUserController(IngredientService ingredientService) {
         this.ingredientService = ingredientService;
     }
 
@@ -36,25 +32,6 @@ public class LoggedUserController {
     @GetMapping("/dashboard")
     public String showDashboard() {
         return "logged-user/dashboard";
-    }
-
-    @GetMapping("/add-plan")
-    public String addPlan(Model model) {
-        model.addAttribute("plan", new Plan());
-        return "logged-user/addPlan";
-    }
-
-    @PostMapping("/add-plan")
-    public String addingPlan(@Valid Plan plan, BindingResult result) {
-        if (result.hasErrors()) {
-            return "logged-user/addPlan";
-        }
-        User currentUser = userService.getCurrentUserWithPlans();
-        Plan savedPlan = planService.savePlan(plan);
-        currentUser.addPlan(savedPlan);
-        userService.updateUser(currentUser);
-
-        return "redirect:dashboard";
     }
 
 }

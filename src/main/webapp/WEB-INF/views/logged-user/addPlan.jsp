@@ -37,7 +37,7 @@
                     <br />
 
                     <input type="submit" value="Dodaj plan">
-                    <form:button><a href="<c:url value="/logged_user/dashboard"/>">Powrót</a></form:button>
+                    <form:button><a href="<c:url value="/logged-user/dashboard"/>">Powrót</a></form:button>
 
                 </form:form>
 

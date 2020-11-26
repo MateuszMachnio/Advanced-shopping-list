@@ -76,4 +76,5 @@ public class LoggedUserRecipeController {
         recipeService.saveRecipe(recipe);
         return "redirect:list";
     }
+
 }

@@ -3,10 +3,7 @@ package pl.machnio.shoppingList.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.machnio.shoppingList.entity.IngredientWithQuantity;
 import pl.machnio.shoppingList.entity.Recipe;
 import pl.machnio.shoppingList.entity.SetOfIngredientsWithQuantities;
@@ -82,4 +79,19 @@ public class LoggedUserRecipeController {
         model.addAttribute("recipeList", recipeService.findAllRecipes());
         return "logged-user/recipe/list";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteRecipe(@PathVariable long id, Model model) {
+        Recipe recipe = recipeService.findById(id);
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("setOfIngredients", setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(recipe.getSetOfIngredientsWithQuantities().getId()));
+        return "logged-user/recipe/delete";
+    }
+
+    @PostMapping("/delete")
+    public String deletingRecipe(Recipe recipe) {
+        recipeService.deleteRecipe(recipe);
+        return "redirect:list";
+    }
+
 }

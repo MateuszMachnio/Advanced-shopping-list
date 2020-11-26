@@ -58,27 +58,6 @@ public class LoggedUserRecipeController {
         return "logged-user/creatingSetOfIngredients";
     }
 
-//    @GetMapping("/add-next-ingredient-to-set")
-//    public String addNextIngredientsToRecipe(Model model) {
-//        if (model.containsAttribute("setWithIngredients")) {
-//            model.addAttribute("ingredientsWithQuantity", new IngredientWithQuantity());
-//            return "logged-user/creatingSetOfIngredients";
-//        }
-//        return "redirect:create-set-of-ingredients";
-//    }
-//    @PostMapping("/add-next-ingredient-to-set")
-//    public String addingNextIngredientsToRecipe(@Valid @ModelAttribute("ingredientsWithQuantity") IngredientWithQuantity ingredientWithQuantity, BindingResult result, @ModelAttribute("setId") String setId, Model model) {
-//        if (result.hasErrors()) {
-//            return "logged-user/creatingSetOfIngredients";
-//        }
-//        IngredientWithQuantity savedIngredientWithQuantity = ingredientWithQuantityService.saveIngredientWithQuantity(ingredientWithQuantity);
-//        SetOfIngredientsWithQuantities set = setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(Long.parseLong(setId));
-//        set.addIngredientWithQuantity(savedIngredientWithQuantity);
-//        setOfIngredientsWithQuantitiesService.updateSetOfIngredientsWithQuantities(set);
-//        model.addAttribute("setWithIngredients", set);
-//        return "logged-user/creatingSetOfIngredients";
-//    }
-
     @GetMapping("/add")
     public String joinSetOfIngredientsToRecipe(@ModelAttribute("setId") String setId, Model model) {
         SetOfIngredientsWithQuantities setOfIngredients = setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(Long.parseLong(setId));

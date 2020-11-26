@@ -4,16 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.machnio.shoppingList.entity.IngredientWithQuantity;
-import pl.machnio.shoppingList.entity.Recipe;
-import pl.machnio.shoppingList.entity.SetOfIngredientsWithQuantities;
-import pl.machnio.shoppingList.entity.User;
-import pl.machnio.shoppingList.service.IngredientWithQuantityService;
-import pl.machnio.shoppingList.service.RecipeService;
-import pl.machnio.shoppingList.service.SetOfIngredientsWithQuantitiesService;
-import pl.machnio.shoppingList.service.UserService;
+import pl.machnio.shoppingList.entity.*;
+import pl.machnio.shoppingList.service.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/logged-user/recipe")
@@ -23,12 +18,19 @@ public class LoggedUserRecipeController {
     private final IngredientWithQuantityService ingredientWithQuantityService;
     private final SetOfIngredientsWithQuantitiesService setOfIngredientsWithQuantitiesService;
     private final UserService userService;
+    private final IngredientService ingredientService;
 
-    public LoggedUserRecipeController(RecipeService recipeService, IngredientWithQuantityService ingredientWithQuantityService, SetOfIngredientsWithQuantitiesService setOfIngredientsWithQuantitiesService, UserService userService) {
+    public LoggedUserRecipeController(RecipeService recipeService, IngredientWithQuantityService ingredientWithQuantityService, SetOfIngredientsWithQuantitiesService setOfIngredientsWithQuantitiesService, UserService userService, IngredientService ingredientService) {
         this.recipeService = recipeService;
         this.ingredientWithQuantityService = ingredientWithQuantityService;
         this.setOfIngredientsWithQuantitiesService = setOfIngredientsWithQuantitiesService;
         this.userService = userService;
+        this.ingredientService = ingredientService;
+    }
+
+    @ModelAttribute("ingredients")
+    public List<Ingredient> getIngredients() {
+        return ingredientService.findAllIngredients();
     }
 
     @GetMapping("/create-set-of-ingredients")
@@ -97,6 +99,9 @@ public class LoggedUserRecipeController {
 
     @PostMapping("/delete")
     public String deletingRecipe(Recipe recipe) {
+        User currentUserWithRecipes = userService.getCurrentUserWithRecipes();
+        currentUserWithRecipes.removeRecipe(recipe);
+        userService.updateUser(currentUserWithRecipes);
         recipeService.deleteRecipe(recipe);
         return "redirect:list";
     }
@@ -109,10 +114,69 @@ public class LoggedUserRecipeController {
         return "logged-user/recipe/edit";
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/edit")
     public String editingRecipe(Recipe recipe) {
         recipeService.updateRecipe(recipe);
         return "redirect:list";
+    }
+
+    @PostMapping("/edit-set-of-ingredients")
+    public String editSetOfIngredients(@ModelAttribute("setOfIngredients") SetOfIngredientsWithQuantities setOfIngredientsWithQuantities, @ModelAttribute("setOfIngredientsId") long setId, @ModelAttribute("recipeId") long recipeId,  Model model) {
+        model.addAttribute("setOfIngredients", setOfIngredientsWithQuantities);
+        model.addAttribute("recipeId", recipeId);
+        return "logged-user/recipe/editSetOfIngredients";
+    }
+
+    @PostMapping("/edit-ingredient")
+    public String editIngredient(@ModelAttribute("iwqId") long iwqId, @ModelAttribute("setId") long setId, @ModelAttribute("recipeId") long recipeId, Model model) {
+        model.addAttribute("ingredientWithQuantity", ingredientWithQuantityService.findById(iwqId));
+        model.addAttribute("setId", setId);
+        model.addAttribute("recipeId", recipeId);
+        return "/logged-user/recipe/editIngredientWithQuantity";
+    }
+
+    @PostMapping("/editing-ingredient")
+    public String editIngredient(@Valid @ModelAttribute("ingredientWithQuantity") IngredientWithQuantity ingredientWithQuantity, BindingResult result, @ModelAttribute("setId") long setId, @ModelAttribute("recipeId") long recipeId, Model model) {
+        if (result.hasErrors()) {
+            return "/logged-user/recipe/editIngredientWithQuantity";
+        }
+        ingredientWithQuantityService.updateIngredientWithQuantity(ingredientWithQuantity);
+        model.addAttribute("setOfIngredients", setOfIngredientsWithQuantitiesService.findById(setId));
+        model.addAttribute("recipeId", recipeId);
+        return "logged-user/recipe/editSetOfIngredients";
+    }
+
+    @PostMapping("/delete-ingredient")
+    public String deleteIngredient(@ModelAttribute("iwqId") long iwqId, @ModelAttribute("setId") long setId, @ModelAttribute("recipeId") long recipeId, Model model) {
+        SetOfIngredientsWithQuantities set = setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(setId);
+        set.removeIngredientWithQuantity(ingredientWithQuantityService.findById(iwqId));
+        setOfIngredientsWithQuantitiesService.updateSetOfIngredientsWithQuantities(set);
+        ingredientWithQuantityService.deleteIngredientWithQuantityById(iwqId);
+        model.addAttribute("setOfIngredients", set);
+        model.addAttribute("recipeId", recipeId);
+        return "/logged-user/recipe/editSetOfIngredients";
+    }
+
+    @PostMapping("/add-ingredient")
+    public String addIngredient(@ModelAttribute("setId") long setId, @ModelAttribute("recipeId") long recipeId, Model model) {
+        model.addAttribute("ingredientWithQuantity", new IngredientWithQuantity());
+        model.addAttribute("setId", setId);
+        model.addAttribute("recipeId", recipeId);
+        return "/logged-user/recipe/addIngredientToSet";
+    }
+
+    @PostMapping("/adding-ingredient")
+    public String addingIngredient(@Valid @ModelAttribute("ingredientWithQuantity") IngredientWithQuantity ingredientWithQuantity, BindingResult result, @ModelAttribute("setId") long setId, @ModelAttribute("recipeId") long recipeId, Model model) {
+        if (result.hasErrors()) {
+            return "/logged-user/recipe/addIngredientToSet";
+        }
+        IngredientWithQuantity savedIngredientWithQuantity = ingredientWithQuantityService.saveIngredientWithQuantity(ingredientWithQuantity);
+        SetOfIngredientsWithQuantities set = setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(setId);
+        set.addIngredientWithQuantity(savedIngredientWithQuantity);
+        setOfIngredientsWithQuantitiesService.updateSetOfIngredientsWithQuantities(set);
+        model.addAttribute("setOfIngredients", set);
+        model.addAttribute("recipeId", recipeId);
+        return "logged-user/recipe/editSetOfIngredients";
     }
 
 }

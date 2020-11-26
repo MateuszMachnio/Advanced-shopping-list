@@ -18,17 +18,6 @@ import java.util.Set;
 @RequestMapping("/logged-user")
 public class LoggedUserController {
 
-    private final IngredientService ingredientService;
-
-    public LoggedUserController(IngredientService ingredientService) {
-        this.ingredientService = ingredientService;
-    }
-
-    @ModelAttribute("ingredients")
-    public List<Ingredient> getIngredients() {
-        return ingredientService.findAllIngredients();
-    }
-
     @GetMapping("/dashboard")
     public String showDashboard() {
         return "logged-user/dashboard";

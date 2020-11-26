@@ -62,7 +62,9 @@
                                 </table>
                             </td>
                             <td>
-                                <form:form modelAttribute="setOfIngredients" method="post" action="...">
+                                <form:form modelAttribute="setOfIngredients" method="post" action="/logged-user/recipe/edit-set-of-ingredients">
+                                    <input type="hidden" name="setOfIngredientsId" value="${setOfIngredients.id}">
+                                    <input type="hidden" name="recipeId" value="${recipe.id}">
                                     <input type="submit" value="Edytuj składniki">
                                 </form:form>
                             </td>

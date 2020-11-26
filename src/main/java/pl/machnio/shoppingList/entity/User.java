@@ -64,6 +64,10 @@ public class User {
         recipes.add(recipe);
     }
 
+    public void removeRecipe(Recipe recipe) {
+        recipes.remove(recipe);
+    }
+
     public LocalDateTime getCreated() {
         return created;
     }

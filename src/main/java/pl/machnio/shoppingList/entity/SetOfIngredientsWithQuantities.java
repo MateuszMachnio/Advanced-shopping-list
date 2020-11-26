@@ -20,6 +20,11 @@ public class SetOfIngredientsWithQuantities {
     public void addIngredientWithQuantity(IngredientWithQuantity ingredientWithQuantity) {
         ingredientsWithQuantities.add(ingredientWithQuantity);
     }
+
+    public void removeIngredientWithQuantity(IngredientWithQuantity ingredientWithQuantity) {
+        ingredientsWithQuantities.remove(ingredientWithQuantity);
+    }
+
     public Long getId() {
         return id;
     }

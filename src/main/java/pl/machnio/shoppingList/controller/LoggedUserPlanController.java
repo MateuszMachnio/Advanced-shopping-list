@@ -36,11 +36,11 @@ public class LoggedUserPlanController {
         if (result.hasErrors()) {
             return "/logged-user/plan/add";
         }
-        User currentUser = userService.getCurrentUserWithPlans();
         Plan savedPlan = planService.savePlan(plan);
+        User currentUser = userService.getCurrentUserWithPlans();
         currentUser.addPlan(savedPlan);
         userService.updateUser(currentUser);
-
         return "redirect:/logged-user/dashboard";
     }
+
 }

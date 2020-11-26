@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import pl.machnio.shoppingList.entity.IngredientWithQuantity;
 import pl.machnio.shoppingList.entity.Recipe;
 import pl.machnio.shoppingList.entity.SetOfIngredientsWithQuantities;
+import pl.machnio.shoppingList.entity.User;
 import pl.machnio.shoppingList.service.IngredientWithQuantityService;
 import pl.machnio.shoppingList.service.RecipeService;
 import pl.machnio.shoppingList.service.SetOfIngredientsWithQuantitiesService;
+import pl.machnio.shoppingList.service.UserService;
 
 import javax.validation.Valid;
 
@@ -20,11 +22,13 @@ public class LoggedUserRecipeController {
     private final RecipeService recipeService;
     private final IngredientWithQuantityService ingredientWithQuantityService;
     private final SetOfIngredientsWithQuantitiesService setOfIngredientsWithQuantitiesService;
+    private final UserService userService;
 
-    public LoggedUserRecipeController(RecipeService recipeService, IngredientWithQuantityService ingredientWithQuantityService, SetOfIngredientsWithQuantitiesService setOfIngredientsWithQuantitiesService) {
+    public LoggedUserRecipeController(RecipeService recipeService, IngredientWithQuantityService ingredientWithQuantityService, SetOfIngredientsWithQuantitiesService setOfIngredientsWithQuantitiesService, UserService userService) {
         this.recipeService = recipeService;
         this.ingredientWithQuantityService = ingredientWithQuantityService;
         this.setOfIngredientsWithQuantitiesService = setOfIngredientsWithQuantitiesService;
+        this.userService = userService;
     }
 
     @GetMapping("/create-set-of-ingredients")
@@ -70,13 +74,16 @@ public class LoggedUserRecipeController {
         if (result.hasErrors()) {
             return "logged-user/recipe/add";
         }
-        recipeService.saveRecipe(recipe);
+        Recipe savedRecipe = recipeService.saveRecipe(recipe);
+        User currentUserWithRecipes = userService.getCurrentUserWithRecipes();
+        currentUserWithRecipes.addRecipe(savedRecipe);
+        userService.updateUser(currentUserWithRecipes);
         return "redirect:list";
     }
 
     @GetMapping("/list")
     public String recipeList(Model model) {
-        model.addAttribute("recipeList", recipeService.findAllRecipes());
+        model.addAttribute("recipeList", userService.getCurrentUserWithRecipes().getRecipes());
         return "logged-user/recipe/list";
     }
 

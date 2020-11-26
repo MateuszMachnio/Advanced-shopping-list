@@ -80,6 +80,6 @@ public class LoggedUserRecipeController {
     @GetMapping("/list")
     public String recipeList(Model model) {
         model.addAttribute("recipeList", recipeService.findAllRecipes());
-        return
+        return "logged-user/recipe/list";
     }
 }

@@ -64,7 +64,12 @@
                     </table>
                     <br />
 
-                    <input type="hidden" name="setId" value="${setWithIngredients.id}">
+                    <c:if test="${setWithIngredients != null}">
+                        <input type="hidden" name="setId" value="${setWithIngredients.id}">
+                    </c:if>
+                    <c:if test="${setWithIngredients == null}">
+                        <input type="hidden" name="setId" value="0">
+                    </c:if>
 
                     <input type="submit" value="Dodaj składnik">
 <%--                    <form:button><a href="<c:url value="/logged_user/dashboard"/>">Gotowe</a></form:button>--%>

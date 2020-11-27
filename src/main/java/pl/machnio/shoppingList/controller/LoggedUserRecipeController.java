@@ -40,14 +40,17 @@ public class LoggedUserRecipeController {
     }
 
     @PostMapping("/create-set-of-ingredients")
-    public String addingIngredientsToRecipe(@Valid @ModelAttribute("ingredientsWithQuantity") IngredientWithQuantity ingredientWithQuantity, BindingResult result, @ModelAttribute("setId") String setId, Model model) {
+    public String addingIngredientsToRecipe(@Valid @ModelAttribute("ingredientsWithQuantity") IngredientWithQuantity ingredientWithQuantity, BindingResult result, @ModelAttribute("setId") long setId, Model model) {
         if (result.hasErrors()) {
+            if (setId > 0) {
+                model.addAttribute("setWithIngredients", setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(setId));
+            }
             return "logged-user/recipe/creatingSetOfIngredients";
         }
 
         IngredientWithQuantity savedIngredientWithQuantity = ingredientWithQuantityService.saveIngredientWithQuantity(ingredientWithQuantity);
-        if (!setId.isEmpty()) {
-            SetOfIngredientsWithQuantities set = setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(Long.parseLong(setId));
+        if (setId > 0) {
+            SetOfIngredientsWithQuantities set = setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(setId);
             set.addIngredientWithQuantity(savedIngredientWithQuantity);
             setOfIngredientsWithQuantitiesService.updateSetOfIngredientsWithQuantities(set);
             model.addAttribute("setWithIngredients", set);
@@ -116,8 +119,9 @@ public class LoggedUserRecipeController {
     }
 
     @PostMapping("/edit")
-    public String editingRecipe(@Valid Recipe recipe, BindingResult result) {
+    public String editingRecipe(@Valid Recipe recipe, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("setOfIngredients", setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(recipe.getSetOfIngredientsWithQuantities().getId()));
             return "logged-user/recipe/edit";
         }
         recipeService.updateRecipe(recipe);

@@ -50,7 +50,7 @@
                         </tr>
                         <tr>
                             <td><form:label path="setOfIngredientsWithQuantities">Składniki: </form:label></td>
-                            <form:hidden path="setOfIngredientsWithQuantities"/>
+                            <form:hidden path="setOfIngredientsWithQuantities" value="${setOfIngredients.id}"/>
                             <td>
                                 <table>
                                     <c:forEach items="${setOfIngredients.ingredientsWithQuantities}" var="ingredientWithQuantity">
@@ -71,8 +71,6 @@
                         </tr>
                     </table>
                     <br />
-                    <form:hidden path="created" disabled="true"/>
-                    <form:hidden path="updated" disabled="true"/>
 
                     <input type="submit" value="Edytuj przepis">
                     <%--                    <form:button><a href="<c:url value="/logged_user/dashboard"/>">Gotowe</a></form:button>--%>

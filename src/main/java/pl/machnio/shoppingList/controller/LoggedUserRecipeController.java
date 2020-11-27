@@ -115,7 +115,10 @@ public class LoggedUserRecipeController {
     }
 
     @PostMapping("/edit")
-    public String editingRecipe(Recipe recipe) {
+    public String editingRecipe(@Valid Recipe recipe, BindingResult result) {
+        if (result.hasErrors()) {
+            return "logged-user/recipe/edit";
+        }
         recipeService.updateRecipe(recipe);
         return "redirect:list";
     }

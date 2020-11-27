@@ -60,12 +60,7 @@
                                     </c:forEach>
                                 </table>
                             </td>
-                            <td>
-
-                                <form:form modelAttribute="setOfIngredients" method="post" action="">
-                                    <input type="submit" value="Edytuj składniki">
-                                </form:form>
-                            </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td colspan="3"><form:errors path="setOfIngredientsWithQuantities"/></td>

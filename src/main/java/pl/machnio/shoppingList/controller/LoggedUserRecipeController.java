@@ -72,8 +72,9 @@ public class LoggedUserRecipeController {
     }
 
     @PostMapping("/add")
-    public String addRecipe(@Valid Recipe recipe, BindingResult result) {
+    public String addRecipe(@Valid Recipe recipe, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("setOfIngredients", setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(recipe.getSetOfIngredientsWithQuantities().getId()));
             return "logged-user/recipe/add";
         }
         Recipe savedRecipe = recipeService.saveRecipe(recipe);

@@ -29,7 +29,7 @@
                         <c:forEach items="${setWithIngredients.ingredientsWithQuantities}" var="ingredientWithQuantity">
                             <tr>
                                 <td>${ingredientWithQuantity.ingredient.name}</td>
-                                <td>${ingredientWithQuantity.quantity}</td>
+                                <td>${ingredientWithQuantity.quantity} gram</td>
                             </tr>
                         </c:forEach>
                     </table>

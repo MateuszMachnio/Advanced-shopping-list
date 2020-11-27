@@ -194,3 +194,9 @@ INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('czwartek');
 INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('piątek');
 INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('sobota');
 INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('niedziela');
+
+INSERT INTO shopping_list.meal_names (meal_name) VALUES ('śniadanie');
+INSERT INTO shopping_list.meal_names (meal_name) VALUES ('II śniadanie');
+INSERT INTO shopping_list.meal_names (meal_name) VALUES ('obiad');
+INSERT INTO shopping_list.meal_names (meal_name) VALUES ('podwieczorek');
+INSERT INTO shopping_list.meal_names (meal_name) VALUES ('kolacja');

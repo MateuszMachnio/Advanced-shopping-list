@@ -31,28 +31,31 @@
                                 <td>${ingredientWithQuantity.ingredient.name}</td>
                                 <td>${ingredientWithQuantity.quantity} gram</td>
                                 <td>
-                                    <form action="/logged-user/recipe/edit-ingredient" method="post">
-                                        <input type="hidden" name="iwqId" value="${ingredientWithQuantity.id}">
-                                        <input type="hidden" name="setId" value="${setOfIngredients.id}">
-                                        <input type="hidden" name="recipeId" value="${recipeId}">
-                                        <input type="submit" value="edytuj">
-                                    </form>
-                                    <form action="/logged-user/recipe/delete-ingredient" method="post">
-                                        <input type="hidden" name="iwqId" value="${ingredientWithQuantity.id}">
-                                        <input type="hidden" name="setId" value="${setOfIngredients.id}">
-                                        <input type="hidden" name="recipeId" value="${recipeId}">
-                                        <input type="submit" value="usuń">
-                                    </form>
+<%--                                    <form action="/logged-user/recipe/edit-ingredient" method="post">--%>
+<%--                                        <input type="hidden" name="iwqId" value="${ingredientWithQuantity.id}">--%>
+<%--                                        <input type="hidden" name="setId" value="${setOfIngredients.id}">--%>
+<%--                                        <input type="hidden" name="recipeId" value="${recipeId}">--%>
+<%--                                        <input type="submit" value="edytuj">--%>
+<%--                                    </form>--%>
+                                    <button type="button"><a href="/logged-user/recipe/edit-ingredient/${recipeId}/${setOfIngredients.id}/${ingredientWithQuantity.id}">edytuj</a></button>
+<%--                                    <form action="/logged-user/recipe/delete-ingredient" method="post">--%>
+<%--                                        <input type="hidden" name="iwqId" value="${ingredientWithQuantity.id}">--%>
+<%--                                        <input type="hidden" name="setId" value="${setOfIngredients.id}">--%>
+<%--                                        <input type="hidden" name="recipeId" value="${recipeId}">--%>
+<%--                                        <input type="submit" value="usuń">--%>
+<%--                                    </form>--%>
+                                    <button type="button"><a href="/logged-user/recipe/delete-ingredient/${recipeId}/${setOfIngredients.id}/${ingredientWithQuantity.id}">usuń</a></button>
                                 </td>
                             </tr>
                         </c:forEach>
                         <tr>
                             <td colspan="3">
-                                <form action="/logged-user/recipe/add-ingredient" method="post">
-                                    <input type="hidden" name="setId" value="${setOfIngredients.id}">
-                                    <input type="hidden" name="recipeId" value="${recipeId}">
-                                    <input type="submit" value="Dodaj nowy składnik">
-                                </form>
+<%--                                <form action="/logged-user/recipe/add-ingredient" method="post">--%>
+<%--                                    <input type="hidden" name="setId" value="${setOfIngredients.id}">--%>
+<%--                                    <input type="hidden" name="recipeId" value="${recipeId}">--%>
+<%--                                    <input type="submit" value="Dodaj nowy składnik">--%>
+<%--                                </form>--%>
+                                <button type="button"><a href="/logged-user/recipe/add-ingredient/${recipeId}/${setOfIngredients.id}">Dodaj nowy składnik</a></button>
                             </td>
                         </tr>
                     </table>

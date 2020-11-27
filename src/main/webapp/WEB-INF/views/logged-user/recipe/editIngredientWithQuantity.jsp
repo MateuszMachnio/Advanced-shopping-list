@@ -25,12 +25,13 @@
                     <table>
                         <tr>
                             <td><form:label path="ingredient">Nazwa: </form:label></td>
-                            <td><form:input path="ingredient"  disabled="true"/></td>
+                            <form:hidden path="ingredient" value="${ingredientId}" />
+                            <td><input type="text" value="${ingredientName}" readonly></td>
                             <td><form:errors path="ingredient" cssClass="error"/></td>
                         </tr>
                         <tr>
                             <td><form:label path="quantity">Ilość: </form:label></td>
-                            <td><form:input path="quantity" /></td>
+                            <td><form:input path="quantity" />gram</td>
                             <td><form:errors path="quantity" cssClass="error"/></td>
                         </tr>
                     </table>

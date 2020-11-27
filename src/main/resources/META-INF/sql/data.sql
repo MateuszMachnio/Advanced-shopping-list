@@ -186,3 +186,11 @@ INSERT INTO shopping_list.ingredients (name) VALUES ('olej sezamowy');
 INSERT INTO shopping_list.ingredients (name) VALUES ('olej słonecznikowy');
 INSERT INTO shopping_list.ingredients (name) VALUES ('olej z pestek winogron');
 INSERT INTO shopping_list.ingredients (name) VALUES ('oliwa z oliwek');
+
+INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('poniedziałek');
+INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('wtorek');
+INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('środa');
+INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('czwartek');
+INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('piątek');
+INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('sobota');
+INSERT INTO shopping_list.day_of_the_week (day_name) VALUES ('niedziela');

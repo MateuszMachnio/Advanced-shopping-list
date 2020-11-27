@@ -33,10 +33,11 @@
                             </tr>
                         </c:forEach>
                     </table>
-                    <form action="/logged-user/recipe/add">
+                    <form action="<c:url value="/logged-user/recipe/add"/>">
                         <input type="hidden" name="setId" value="${setWithIngredients.id}">
                         <input type="submit" value="Zatwierdź">
                     </form>
+<%--                    jeśli nie można postem to równie dobrze można zrobić zwykły button, czemu nie można postem?--%>
 
                 </c:if>
 

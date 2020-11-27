@@ -20,7 +20,7 @@
             <div id="text" style="text-align: center">
                 <h1>Dodawanie przepisu</h1>
 
-                <form:form modelAttribute="recipe">
+                <form:form modelAttribute="recipe" action="/logged-user/recipe/add" method="post">
                     <table>
                         <tr>
                             <td><form:label path="name">Nazwa przepisu: </form:label></td>
@@ -44,12 +44,12 @@
                         </tr>
                         <tr>
                             <td><form:label path="preparationTime">Czas przygotowania: </form:label></td>
-                            <td><form:input path="preparationTime"/></td>
+                            <td><form:input path="preparationTime"/> min</td>
                             <td><form:errors path="preparationTime" cssClass="error"/></td>
                         </tr>
                         <tr>
                             <td><form:label path="setOfIngredientsWithQuantities">Składniki: </form:label></td>
-                            <form:hidden path="setOfIngredientsWithQuantities"/>
+                            <form:hidden path="setOfIngredientsWithQuantities" value="${setOfIngredients.id}"/>
                             <td>
                                 <table>
                                     <c:forEach items="${setOfIngredients.ingredientsWithQuantities}" var="ingredientWithQuantity">
@@ -61,10 +61,14 @@
                                 </table>
                             </td>
                             <td>
-                                <form:form modelAttribute="setOfIngredients" method="post" action="...">
+
+                                <form:form modelAttribute="setOfIngredients" method="post" action="">
                                     <input type="submit" value="Edytuj składniki">
                                 </form:form>
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><form:errors path="setOfIngredientsWithQuantities"/></td>
                         </tr>
                     </table>
                     <br />

@@ -62,10 +62,10 @@ public class LoggedUserRecipeController {
     }
 
     @GetMapping("/add")
-    public String joinSetOfIngredientsToRecipe(@ModelAttribute("setId") String setId, Model model) {
-        SetOfIngredientsWithQuantities setOfIngredients = setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(Long.parseLong(setId));
+    public String joinSetOfIngredientsToRecipe(@ModelAttribute("setId") long setId, Model model) {
+        SetOfIngredientsWithQuantities setOfIngredients = setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(setId);
         Recipe recipe = new Recipe();
-        recipe.setSetOfIngredientsWithQuantities(setOfIngredients);
+//        recipe.setSetOfIngredientsWithQuantities(setOfIngredients);
         model.addAttribute("setOfIngredients", setOfIngredients);
         model.addAttribute("recipe", recipe);
         return "logged-user/recipe/add";

@@ -25,27 +25,26 @@
                     <table>
                         <tr>
                             <td><form:label path="name">Nazwa przepisu: </form:label></td>
-                            <td><form:input path="name" disabled="true"/></td>
+                            <td><form:input path="name" readonly="true"/></td>
                         </tr>
                         <tr>
                             <td><form:label path="description">Opis przepisu: </form:label></td>
-                            <td><form:textarea cols="20" rows="5" path="description" disabled="true"/></td>
+                            <td><form:textarea cols="20" rows="5" path="description" readonly="true"/></td>
                         </tr>
                         <tr>
                             <td><form:label path="preparation">Przygotowanie: </form:label></td>
-                            <td><form:textarea cols="20" rows="10" path="preparation" disabled="true"/></td>
+                            <td><form:textarea cols="20" rows="10" path="preparation" readonly="true"/></td>
                         </tr>
                         <tr>
                             <td><form:label path="numberOfServings">Ilość porcji: </form:label></td>
-                            <td><form:input path="numberOfServings" disabled="true"/></td>
+                            <td><form:input path="numberOfServings" readonly="true"/></td>
                         </tr>
                         <tr>
                             <td><form:label path="preparationTime">Czas przygotowania: </form:label></td>
-                            <td><form:input path="preparationTime" disabled="true"/></td>
+                            <td><form:input path="preparationTime" readonly="true"/></td>
                         </tr>
                         <tr>
                             <td><form:label path="setOfIngredientsWithQuantities">Składniki: </form:label></td>
-                            <form:hidden path="setOfIngredientsWithQuantities"/>
                             <td>
                             <table>
                             <c:forEach items="${setOfIngredients.ingredientsWithQuantities}" var="ingredientWithQuantity">
@@ -59,8 +58,6 @@
                         </tr>
                     </table>
                     <br />
-                    <form:hidden path="created" disabled="true"/>
-                    <form:hidden path="updated" disabled="true"/>
 
                     <input type="submit" value="Usuń przepis">
                     <%--                    <form:button><a href="<c:url value="/logged_user/dashboard"/>">Gotowe</a></form:button>--%>

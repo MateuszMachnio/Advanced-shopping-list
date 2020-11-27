@@ -17,6 +17,7 @@ import org.springframework.web.servlet.LocaleContextResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import pl.machnio.shoppingList.converter.IngredientConverter;
+import pl.machnio.shoppingList.converter.SetOfIngredientsWithQuantitiesConverter;
 
 import javax.persistence.EntityManagerFactory;
 import java.nio.charset.StandardCharsets;
@@ -51,6 +52,7 @@ public class AppConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(ingredientConverter());
+        registry.addConverter(setOfIngredientsWithQuantitiesConverter());
     }
 
     @Bean
@@ -93,4 +95,8 @@ public class AppConfig implements WebMvcConfigurer {
         return new IngredientConverter();
     }
 
+    @Bean
+    public SetOfIngredientsWithQuantitiesConverter setOfIngredientsWithQuantitiesConverter() {
+        return new SetOfIngredientsWithQuantitiesConverter();
+    }
 }

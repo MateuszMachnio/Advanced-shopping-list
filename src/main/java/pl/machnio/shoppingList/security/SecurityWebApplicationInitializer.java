@@ -8,5 +8,4 @@ import javax.servlet.ServletContext;
 
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
 
-
 }

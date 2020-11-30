@@ -64,7 +64,7 @@ public class LoggedUserRecipeController {
         return "logged-user/recipe/creatingSetOfIngredients";
     }
 
-    @GetMapping("/add")
+    @RequestMapping(path = "/add", method=RequestMethod.POST)
     public String joinSetOfIngredientsToRecipe(@ModelAttribute("setId") long setId, Model model) {
         SetOfIngredientsWithQuantities setOfIngredients = setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(setId);
         Recipe recipe = new Recipe();
@@ -74,7 +74,7 @@ public class LoggedUserRecipeController {
         return "logged-user/recipe/add";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/adding")
     public String addRecipe(@Valid Recipe recipe, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("setOfIngredients", setOfIngredientsWithQuantitiesService.findByIdWithSetOfIngredientsWithQuantity(recipe.getSetOfIngredientsWithQuantities().getId()));

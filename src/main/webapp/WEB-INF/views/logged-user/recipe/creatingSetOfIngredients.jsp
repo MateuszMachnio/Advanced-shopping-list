@@ -33,7 +33,7 @@
                             </tr>
                         </c:forEach>
                     </table>
-                    <form action="<c:url value="/logged-user/recipe/add"/>">
+                    <form action="<c:url value="/logged-user/recipe/add"/>" method="post">
                         <input type="hidden" name="setId" value="${setWithIngredients.id}">
                         <input type="submit" value="Zatwierdź">
                     </form>
@@ -43,7 +43,7 @@
 
 
 
-                <form:form modelAttribute="ingredientsWithQuantity">
+                <form:form modelAttribute="ingredientsWithQuantity" method="post" action="/logged-user/recipe/create-set-of-ingredients">
                     <table>
                         <tr>
                             <td><form:label path="ingredient">Składnik: </form:label></td>

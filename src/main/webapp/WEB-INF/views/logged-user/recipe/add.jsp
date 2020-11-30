@@ -20,7 +20,7 @@
             <div id="text" style="text-align: center">
                 <h1>Dodawanie przepisu</h1>
 
-                <form:form modelAttribute="recipe" action="/logged-user/recipe/add" method="post">
+                <form:form modelAttribute="recipe" action="/logged-user/recipe/adding" method="post">
                     <table>
                         <tr>
                             <td><form:label path="name">Nazwa przepisu: </form:label></td>
